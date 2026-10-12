@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="mk"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AURA Coffee House</title>
+<meta content="AURA Coffee House — specialty coffee, matcha and sweet moments in Skopje." name="description"/>
+<link href="https://fonts.googleapis.com/" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="loader" id="loader">
+<div class="loader-inner">
+<div class="loader-mark">A</div>
+<div class="loader-text">AURA COFFEE HOUSE</div>
+</div>
+</div>
+<header class="header" id="header">
+<div class="container nav">
+<a class="logo" href="#home">
+<div class="logo-circle">A</div>
+<div class="logo-text">
+<strong>AURA</strong>
+<small>COFFEE HOUSE</small>
+</div>
+</a>
+<nav class="nav-links">
+<a class="nav-link" data-i18n="nav.home" href="#home">Почетна</a>
+<a class="nav-link" data-i18n="nav.menu" href="#menu">Мени</a>
+<a class="nav-link" data-i18n="nav.rituals" href="#rituals">Ритуали</a>
+<a class="nav-link" data-i18n="nav.story" href="#story">Нашата приказна</a>
+<a class="nav-link" data-i18n="nav.gallery" href="#gallery">Галерија</a>
+<a class="nav-link" data-i18n="nav.journal" href="#journal">Блог</a>
+<a class="nav-link" data-i18n="nav.contact" href="#contact">Контакт</a>
+<a class="nav-link special-nav-link" data-i18n="nav.special" href="#something-special">Нешто посебно</a>
+</nav>
+<div class="nav-actions">
+<div class="language-switch">
+<button class="lang-btn active" data-lang="mk">MK</button>
+<button class="lang-btn" data-lang="en">EN</button>
+</div>
+<button aria-label="Toggle cozy sound" class="sound-toggle" id="soundToggle">
+<span class="sound-icon" id="soundIcon">♪</span>
+<span class="sound-label" id="soundLabel">Sound</span>
+</button>
+<button class="order-btn" data-i18n="nav.order" onclick="document.querySelector('#menu').scrollIntoView({behavior:'smooth'})">Нарачај</button>
+<button class="mobile-menu-btn" id="mobileMenuButton">☰</button>
+</div>
+</div>
+</header>
+<div class="mobile-nav" id="mobileNav">
+<a data-i18n="nav.home" data-mobile-link="" href="#home">Почетна</a>
+<a data-i18n="nav.menu" data-mobile-link="" href="#menu">Мени</a>
+<a data-i18n="nav.rituals" data-mobile-link="" href="#rituals">Ритуали</a>
+<a data-i18n="nav.story" data-mobile-link="" href="#story">Нашата приказна</a>
+<a data-i18n="nav.gallery" data-mobile-link="" href="#gallery">Галерија</a>
+<a data-i18n="nav.journal" data-mobile-link="" href="#journal">Блог</a>
+<a data-i18n="nav.contact" data-mobile-link="" href="#contact">Контакт</a>
+</div>
+<section class="hero" id="home">
+<div class="hero-background"></div>
+<div class="container">
+<div class="hero-content">
+<div class="eyebrow hero-eyebrow reveal visible">
+<span data-i18n="hero.eyebrow">Специјалитет кафе и мирни утра</span>
+</div>
+<h1 class="hero-title reveal reveal-delay-1 visible">
+<span data-i18n="hero.line1">Добро кафе.</span>
+<span data-i18n="hero.line2">Подобри денови.</span>
+</h1>
+<p class="hero-description reveal reveal-delay-2 visible" data-i18n="hero.description">
+                Мало кафе-место во Скопје, создадено за мирни утра, убави разговори и кафе кое се памети.
+            </p>
+<div class="hero-buttons reveal reveal-delay-3 visible">
+<a class="primary-btn" data-i18n="hero.menuButton" href="#menu">Погледни мени</a>
+<a class="outline-btn" data-i18n="hero.storyButton" href="#story">Откриј ја AURA</a>
+</div>
+</div>
+</div>
+<div class="hero-note">
+<div class="hero-note-line"></div>
+<span data-i18n="hero.note">варено со мерак</span>
+</div>
+</section>
+<section class="section" id="menu">
+<div class="container">
+<div class="menu-header">
+<div>
+<div class="eyebrow reveal visible">
+<span data-i18n="menu.eyebrow">Создадено за твојот момент</span>
+</div>
+<h2 class="section-title reveal reveal-delay-1 visible">
+<span data-i18n="menu.title1">Нешто</span>
+<br/>
+<span data-i18n="menu.title2">убаво.</span>
+</h2>
+</div>
+<div class="menu-header-right">
+<p class="section-description reveal visible" data-i18n="menu.description">
+                    Од класично еспресо до кремасти матча пијалаци и мирни моменти.
+                </p>
+</div>
+</div>
+<div class="filters reveal visible">
+<button class="filter-btn active" data-filter="all" data-i18n="filters.all">Сè</button>
+<button class="filter-btn" data-filter="coffee" data-i18n="filters.coffee">Кафе</button>
+<button class="filter-btn" data-filter="matcha" data-i18n="filters.matcha">Матча</button>
+<button class="filter-btn" data-filter="tea" data-i18n="filters.tea">Чај</button>
+</div>
+<div class="menu-grid" id="menuGrid">
+
+<article class="menu-card ref-photo-portrait reveal visible" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Latte" class="menu-image" loading="lazy" src="images/image-f7ffc73900.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Latte</h3>
+<p class="menu-description" data-i18n="menu.desc.latte">Класично еспресо со свиленкасто млечно срце.</p>
+<div class="menu-bottom">
+<div class="menu-price">190 ден</div>
+<button aria-label="Додај Latte" class="add-btn" data-image="images/image-f7ffc73900.jpg" data-name="Latte" data-price="190" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-portrait reveal visible reveal-delay-1" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Iced Latte" class="menu-image" loading="lazy" src="images/image-5a35f05d77.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Iced Latte</h3>
+<p class="menu-description" data-i18n="menu.desc.icedLatte">Ладно кафе со млеко и мраз.</p>
+<div class="menu-bottom">
+<div class="menu-price">210 ден</div>
+<button aria-label="Додај Iced Latte" class="add-btn" data-image="images/image-5a35f05d77.jpg" data-name="Iced Latte" data-price="210" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-portrait reveal visible reveal-delay-2" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Cappuccino" class="menu-image" loading="lazy" src="images/image-599e17cb61.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Cappuccino</h3>
+<p class="menu-description" data-i18n="menu.desc.cappuccino">Еспресо со нежна млечна пена.</p>
+<div class="menu-bottom">
+<div class="menu-price">190 ден</div>
+<button aria-label="Додај Cappuccino" class="add-btn" data-image="images/image-599e17cb61.jpg" data-name="Cappuccino" data-price="190" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-portrait reveal visible reveal-delay-3" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Americano" class="menu-image" loading="lazy" src="images/image-c078d31355.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Americano</h3>
+<p class="menu-description" data-i18n="menu.desc.americano">Богато и ароматично црно кафе.</p>
+<div class="menu-bottom">
+<div class="menu-price">170 ден</div>
+<button aria-label="Додај Americano" class="add-btn" data-image="images/image-c078d31355.jpg" data-name="Americano" data-price="170" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-portrait reveal visible reveal-delay-3" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Vanilla Latte" class="menu-image" loading="lazy" src="images/image-ea1d49caaa.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Vanilla Latte</h3>
+<p class="menu-description" data-i18n="menu.desc.vanillaLatte">Нежно лате со вкус на ванила.</p>
+<div class="menu-bottom">
+<div class="menu-price">220 ден</div>
+<button aria-label="Додај Vanilla Latte" class="add-btn" data-image="images/image-ea1d49caaa.jpg" data-name="Vanilla Latte" data-price="220" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-square reveal visible reveal-delay-3" data-category="matcha">
+<div class="menu-image-wrap">
+<img alt="Matcha Latte" class="menu-image" loading="lazy" src="images/image-1f1bb55c3f.jpg"/>
+<div class="menu-tag">Matcha</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Matcha Latte</h3>
+<p class="menu-description" data-i18n="menu.desc.matchaLatte">Јапонска матча со кремасто млеко.</p>
+<div class="menu-bottom">
+<div class="menu-price">240 ден</div>
+<button aria-label="Додај Matcha Latte" class="add-btn" data-image="images/image-1f1bb55c3f.jpg" data-name="Matcha Latte" data-price="240" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-square reveal visible reveal-delay-3" data-category="matcha">
+<div class="menu-image-wrap">
+<img alt="Strawberry Matcha" class="menu-image" loading="lazy" src="images/image-d9bf844baf.jpg"/>
+<div class="menu-tag">Matcha</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Strawberry Matcha</h3>
+<p class="menu-description" data-i18n="menu.desc.strawberryMatcha">Матча, јагоди и ладно млеко.</p>
+<div class="menu-bottom">
+<div class="menu-price">260 ден</div>
+<button aria-label="Додај Strawberry Matcha" class="add-btn" data-image="images/image-d9bf844baf.jpg" data-name="Strawberry Matcha" data-price="260" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card ref-photo-square reveal visible reveal-delay-3" data-category="tea">
+<div class="menu-image-wrap">
+<img alt="Iced Tea" class="menu-image" loading="lazy" src="images/image-dfa2bc7dd6.jpg"/>
+<div class="menu-tag">Tea</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Iced Tea</h3>
+<p class="menu-description" data-i18n="menu.desc.icedTea">Освежителен ладен чај со цитрус.</p>
+<div class="menu-bottom">
+<div class="menu-price">180 ден</div>
+<button aria-label="Додај Iced Tea" class="add-btn" data-image="images/image-dfa2bc7dd6.jpg" data-name="Iced Tea" data-price="180" type="button">+</button>
+</div>
+</div>
+</article>
+
+
+
+
+
+
+
+<article class="menu-card extra-coffee reveal reveal-delay-3" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Espresso" class="menu-image" loading="lazy" src="images/image-63d30aa5a9.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Espresso</h3>
+<p class="menu-description" data-i18n="menu.desc.espresso">Кратко, интензивно и совршено избалансирано.</p>
+<div class="menu-bottom">
+<div class="menu-price">150 ден</div>
+<button aria-label="Додај Espresso" class="add-btn" data-image="images/image-63d30aa5a9.jpg" data-name="Espresso" data-price="150" type="button">+</button>
+</div>
+</div>
+</article>
+
+<article class="menu-card extra-coffee reveal reveal-delay-1" data-category="coffee">
+<div class="menu-image-wrap">
+<img alt="Iced Caramel Latte" class="menu-image" loading="lazy" src="images/image-dd8aa48fb7.jpg"/>
+<div class="menu-tag">Coffee</div>
+</div>
+<div class="menu-info">
+<h3 class="menu-name">Iced Caramel Latte</h3>
+<p class="menu-description" data-i18n="menu.desc.icedCaramelLatte">Ладно еспресо со карамела, млеко и нежна пена.</p>
+<div class="menu-bottom">
+<div class="menu-price">230 ден</div>
+<button aria-label="Додај Iced Caramel Latte" class="add-btn" data-image="images/image-dd8aa48fb7.jpg" data-name="Iced Caramel Latte" data-price="230" type="button">+</button>
+</div>
+</div>
+</article>
+
+
+
+<!-- Two correctly matched drinks requested for the home-page menu -->
+
+
+
+</div>
+<div class="menu-more-wrap reveal visible"><button class="menu-more-btn" id="menuMoreBtn" type="button">View More <span>↗</span></button></div>
+</div>
+</section>
+<section class="section ritual" id="rituals">
+<div class="container ritual-grid">
+<div class="ritual-content">
+<div class="eyebrow reveal visible">
+<span data-i18n="ritual.eyebrow">AURA ритуалот</span>
+</div>
+<h2 class="section-title ritual-title reveal reveal-delay-1 visible">
+<span data-i18n="ritual.title1">Од зрно</span>
+<br/>
+<span data-i18n="ritual.title2">до момент.</span>
+</h2>
+<p class="section-description ritual-text reveal reveal-delay-2 visible" data-i18n="ritual.description">
+                Доброто кафе не се брза. Во AURA, секоја шолја има свој мал ритуал.
+            </p>
+<div class="ritual-steps">
+<div class="ritual-step reveal visible">
+<div class="step-number">01</div>
+<div class="step-title" data-i18n="ritual.step1.title">Избери</div>
+<div class="step-text" data-i18n="ritual.step1.text">Избери кафе или матча.</div>
+</div>
+<div class="ritual-step reveal reveal-delay-1 visible">
+<div class="step-number">02</div>
+<div class="step-title" data-i18n="ritual.step2.title">Подготви</div>
+<div class="step-text" data-i18n="ritual.step2.text">Ние го подготвуваме полека.</div>
+</div>
+<div class="ritual-step reveal reveal-delay-2 visible">
+<div class="step-number">03</div>
+<div class="step-title" data-i18n="ritual.step3.title">Остани</div>
+<div class="step-text" data-i18n="ritual.step3.text">Уживај без брзање.</div>
+</div>
+</div>
+</div>
+<div class="ritual-visual reveal visible">
+<img alt="Coffee ritual" class="ritual-image" src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?auto=format&amp;fit=crop&amp;w=900&amp;q=85"/>
+<div class="ritual-badge">
+<span data-i18n="ritual.badge">Бавно кафе. Меки моменти.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="story">
+<div class="container story-grid">
+<div class="story-image-wrap reveal visible">
+<img alt="AURA coffee house" class="story-image" src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?auto=format&amp;fit=crop&amp;w=1000&amp;q=85"/>
+<div class="story-stamp">
+<span data-i18n="story.stamp">Создадено со внимание</span>
+</div>
+</div>
+<div class="story-content">
+<div class="eyebrow reveal visible">
+<span data-i18n="story.eyebrow">Нашата приказна</span>
+</div>
+<h2 class="section-title reveal reveal-delay-1 visible">
+<span data-i18n="story.title1">Повеќе од</span>
+<br/>
+<span data-i18n="story.title2">кафе.</span>
+</h2>
+<p class="section-description story-text reveal reveal-delay-2 visible" data-i18n="story.description">
+                AURA е создадена како мала пауза во средината на градот. Место каде што кафето, луѓето и атмосферата се спојуваат.
+            </p>
+<div class="story-points">
+<div class="story-point reveal visible">
+<div class="story-point-title" data-i18n="story.point1.title">ЛОКАЛНО</div>
+<div class="story-point-text" data-i18n="story.point1.text">Со љубов за Скопје.</div>
+</div>
+<div class="story-point reveal reveal-delay-1 visible">
+<div class="story-point-title" data-i18n="story.point2.title">ВНИМАНИЕ</div>
+<div class="story-point-text" data-i18n="story.point2.text">Секој детаљ е важен.</div>
+</div>
+<div class="story-point reveal reveal-delay-2 visible">
+<div class="story-point-title" data-i18n="story.point3.title">КВАЛИТЕТ</div>
+<div class="story-point-text" data-i18n="story.point3.text">Состојки во кои веруваме.</div>
+</div>
+<div class="story-point reveal reveal-delay-3 visible">
+<div class="story-point-title" data-i18n="story.point4.title">ЛУЃЕ</div>
+<div class="story-point-text" data-i18n="story.point4.text">Маса за секого.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="gallery">
+<div class="container">
+<div class="gallery-header">
+<div>
+<div class="eyebrow reveal">
+<span data-i18n="gallery.eyebrow">Внатре во AURA</span>
+</div>
+<h2 class="section-title reveal reveal-delay-1">
+<span data-i18n="gallery.title1">Мали</span>
+<br/>
+<span data-i18n="gallery.title2">моменти.</span>
+</h2>
+</div>
+<p class="section-description reveal" data-i18n="gallery.description">
+                Топла светлина, свежо кафе и детали кои ја прават AURA посебна.
+            </p>
+</div>
+<div class="gallery-grid">
+<div class="gallery-item reveal">
+<img alt="AURA кафе — логото на ѕидот" src="images/image-72f87f3168.jpg"/>
+<div class="gallery-caption" data-i18n="gallery.caption1">ПРОСТОРОТ</div>
+</div>
+<div class="gallery-item reveal reveal-delay-1">
+<img alt="Лате на маса во топлата AURA атмосфера" src="images/image-0254851c20.jpg"/>
+<div class="gallery-caption" data-i18n="gallery.caption2">БАВНИ УТРА</div>
+</div>
+<div class="gallery-item reveal reveal-delay-2">
+<img alt="Топол ентериер на AURA Coffee House" src="images/image-b20ace3631.jpg"/>
+<div class="gallery-caption" data-i18n="gallery.caption3">ТВОЈАТА МАСА</div>
+</div>
+<div class="gallery-item reveal reveal-delay-3">
+<img alt="Поглед кон барот и просторот на AURA" src="images/image-70d897a97c.jpg"/>
+<div class="gallery-caption" data-i18n="gallery.caption4">СОЗДАДЕНО СО ВНИМАНИЕ</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section team" id="team">
+<div class="container">
+<div class="team-header">
+<div>
+<div class="eyebrow reveal">
+<span data-i18n="team.eyebrow">Луѓето зад AURA</span>
+</div>
+<h2 class="section-title reveal reveal-delay-1">
+<span data-i18n="team.title1">Запознај</span>
+<br/>
+<span data-i18n="team.title2">го тимот.</span>
+</h2>
+</div>
+<p class="section-description reveal" data-i18n="team.description">
+                Четири луѓе, една љубов кон кафето, деталите и добрата енергија.
+            </p>
+</div>
+<div class="team-grid">
+<article class="team-card reveal">
+<img alt="Teodora" class="team-image" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
+<div class="team-info">
+<div class="team-name">Teodora</div>
+<div class="team-role" data-i18n="team.role.barista">Главен бариста</div>
+</div>
+</article>
+<article class="team-card reveal reveal-delay-1">
+<img alt="Elena" class="team-image" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
+<div class="team-info">
+<div class="team-name">Elena</div>
+<div class="team-role" data-i18n="team.role.host">Хост и креатива</div>
+</div>
+</article>
+<article class="team-card reveal reveal-delay-2">
+<img alt="Dejvid" class="team-image" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
+<div class="team-info">
+<div class="team-name">Dejvid</div>
+<div class="team-role" data-i18n="team.role.coffee">Кафе специјалист</div>
+</div>
+</article>
+<article class="team-card reveal reveal-delay-3">
+<img alt="Mihail" class="team-image" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
+<div class="team-info">
+<div class="team-name">Mihail</div>
+<div class="team-role" data-i18n="team.role.kitchen">Кујна и пециво</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="section" id="journal">
+<div class="container">
+<div class="eyebrow reveal">
+<span data-i18n="journal.eyebrow">Од нашиот блог</span>
+</div>
+<h2 class="section-title reveal reveal-delay-1">
+<span data-i18n="journal.title1">Белешки</span>
+<br/>
+<span data-i18n="journal.title2">од AURA.</span>
+</h2>
+<div class="journal-grid" style="margin-top:60px;">
+<article class="article-card reveal">
+<div class="article-date" data-i18n="journal.date1">Белешки за кафе</div>
+<h3 class="article-title" data-i18n="journal.article1.title">Зошто бавното кафе има подобар вкус.</h3>
+<p class="article-text" data-i18n="journal.article1.text">Некои утра бараат побавен почеток. Свежо ги мелеме зрната, ја загреваме шолјата и му даваме време на секој голток — ноти на какао и неколку мирни минути пред денот да започне.</p>
+<a class="article-link" data-article="morning-ritual" data-i18n="journal.read" href="#journal">Прочитај →</a>
+</article>
+<article class="article-card reveal reveal-delay-1">
+<div class="article-date" data-i18n="journal.date2">Матча</div>
+<h3 class="article-title" data-i18n="journal.article2.title">Мал водич за матча.</h3>
+<p class="article-text" data-i18n="journal.article2.text">Матчата е повеќе од нејзината жива зелена боја. Внимателно ја матиме додека не стане мазна, со нежен земјен вкус што одлично се спојува со млеко или јагода.</p>
+<a class="article-link" data-article="matcha-craft" data-i18n="journal.read" href="#journal">Прочитај →</a>
+</article>
+<article class="article-card reveal reveal-delay-2">
+<div class="article-date" data-i18n="journal.date3">AURA</div>
+<h3 class="article-title" data-i18n="journal.article3.title">Уметноста да останеш уште малку.</h3>
+<p class="article-text" data-i18n="journal.article3.text">Избери го местото до прозорецот, нарачај уште едно кафе и остави разговорот да тече. Понекогаш најубавиот дел од денот е едноставно да останеш уште малку.</p>
+<a class="article-link" data-article="quiet-corner" data-i18n="journal.read" href="#journal">Прочитај →</a>
+</article>
+</div>
+</div>
+</section>
+<section class="special-section" id="something-special">
+<div class="container">
+<div class="special-head reveal">
+<div class="special-kicker" data-i18n="special.kicker">AURA ексклузивно</div>
+<h2 data-i18n="special.title">Нешто посебно</h2>
+<p data-i18n="special.intro">Четири посебни AURA доживувања што секоја посета на кафе ја претвораат во убав момент. Разгледајте го нашиот QR систем за дигитално мени подолу за целосна понуда и детални информации.</p>
+</div>
+<div class="special-grid">
+<article class="special-card reveal">
+<div><div class="special-icon">☕</div><h3 data-i18n="special.builder.title">Креирај го своето кафе</h3><p data-i18n="special.builder.text">Создади го својот AURA пијалак. Избери основа, млеко и додаток, а потоа додај ја твојата шолја во нарачката.</p></div>
+<button class="special-action" data-i18n="special.createDrink" data-special="builder" type="button">Креирај го мојот пијалак</button>
+</article>
+<article class="special-card reveal">
+<div><div class="special-icon">◷</div><h3 data-i18n="special.reserve.title">Резервирај маса</h3><p data-i18n="special.reserve.text">Избери датум, време и број на гости. Додај белешка за роденден, место до прозорец или посебно барање.</p></div>
+<button class="special-action" data-i18n="special.reserveButton" data-special="reserve" type="button">Резервирај маса</button>
+</article>
+<article id="digital-menu-qr-card" class="special-card reveal">
+<div><div class="special-icon">✦</div><h3 data-i18n="special.rewards.title">AURA Награди</h3><p data-i18n="special.rewards.text">Собирај AURA печати со секое кафе и отклучи мала награда по шест посети.</p></div>
+<button class="special-action" data-i18n="special.rewardsButton" data-special="rewards" type="button">Отвори награди</button>
+</article>
+<article class="special-card reveal">
+<div><div class="special-icon">▦</div><h3 data-i18n="special.digital.title">Дигитално мени QR и водич</h3><p data-i18n="special.digital.text">Скенирај го QR-кодот за целосно дигитално искуство: комплетен каталог на пијалаци, сезонски напитоци, цени во денари, белешки од баристите и нашата приказна.</p></div>
+<button class="special-action" data-i18n="special.showQr" data-special="qr" type="button">Прикажи QR-код</button>
+</article>
+</div>
+<div class="special-note" data-i18n="special.footerNote">AURA Coffee House · специјалитет кафе · мирни утра</div>
+</div>
+</section>
+<section class="section contact" id="contact">
+<div class="container contact-grid">
+<div class="contact-left">
+<div class="eyebrow reveal">
+<span data-i18n="contact.eyebrow">Дојди да се поздравиме</span>
+</div>
+<h2 class="section-title reveal reveal-delay-1">
+<span data-i18n="contact.title1">Твојата маса</span>
+<br/>
+<span data-i18n="contact.title2">те чека.</span>
+</h2>
+<p class="section-description contact-description reveal reveal-delay-2" data-i18n="contact.description">
+                Дојди по кафето. Остани поради атмосферата. Ќе ни биде мило.
+            </p>
+<div class="contact-details">
+<div class="contact-row reveal">
+<div class="contact-label" data-i18n="contact.address">Адреса</div>
+<div class="contact-value" data-i18n="contact.addressValue">Скопје, Македонија</div>
+</div>
+<div class="contact-row reveal reveal-delay-1">
+<div class="contact-label" data-i18n="contact.phone">Телефон</div>
+<div class="contact-value"><a href="tel:+38970123456">+389 70 123 456</a></div>
+</div>
+<div class="contact-row reveal reveal-delay-2">
+<div class="contact-label" data-i18n="contact.email">Е-пошта</div>
+<div class="contact-value"><a href="mailto:hello@auracafe.mk">hello@auracafe.mk</a></div>
+</div>
+<div class="contact-row reveal reveal-delay-3">
+<div class="contact-label" data-i18n="contact.hours">Работно време</div>
+<div class="contact-value" data-i18n="contact.hoursValue">Пон–Пет 08:00–22:00 · Саб–Нед 09:00–23:00</div>
+</div>
+</div>
+</div>
+<form class="contact-form reveal" id="contactForm">
+<div class="form-group">
+<label class="form-label" data-i18n="form.name">Име</label>
+<input class="form-input" data-placeholder-en="Your name" data-placeholder-mk="Твоето име" id="contactName" name="name" placeholder="Твоето име" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label" data-i18n="form.email">Е-пошта</label>
+<input class="form-input" data-placeholder-en="Your email" data-placeholder-mk="Твојата е-пошта" id="contactEmail" name="email" placeholder="Твојата е-пошта" required="" type="email"/>
+</div>
+<div class="form-group">
+<label class="form-label" data-i18n="form.subject">Тема</label>
+<select class="form-select" id="contactSubject" name="subject">
+<option data-i18n="form.general" value="general">Општо прашање</option>
+<option data-i18n="form.reservation" value="reservation">Резервација</option>
+<option data-i18n="form.event" value="event">Приватен настан</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label" data-i18n="form.phone">Телефон</label>
+<input class="form-input" data-placeholder-en="+389..." data-placeholder-mk="+389..." id="contactPhone" name="phone" placeholder="+389..." type="tel"/>
+</div>
+<div class="form-group full">
+<label class="form-label" data-i18n="form.message">Порака</label>
+<textarea class="form-textarea" data-placeholder-en="Tell us something..." data-placeholder-mk="Кажете ни нешто..." id="contactMessage" name="message" placeholder="Кажете ни нешто..." required=""></textarea>
+</div>
+<button class="submit-btn" data-i18n="form.send" type="submit">Испрати порака</button>
+</form>
+</div>
+</section>
+<section class="section map-section">
+<div class="container">
+<div class="map-wrapper reveal">
+<div class="map-overlay">
+<div class="map-title" data-i18n="map.title">Најди ја AURA</div>
+<div class="map-address" data-i18n="map.address">Скопје, Северна Македонија</div>
+<a class="map-link" data-i18n="map.open" href="https://www.google.com/maps/search/?api=1&amp;query=Skopje%2C%20North%20Macedonia" rel="noopener" target="_blank">Отвори во Google Maps →</a>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer">
+<div class="container">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="logo" href="#home">
+<div class="logo-circle">A</div>
+<div class="logo-text">
+<strong>AURA</strong>
+<small>COFFEE HOUSE</small>
+</div>
+</a>
+<p data-i18n="footer.description">Специјалитет кафе, матча и бавни моменти во срцето на Скопје.</p>
+</div>
+<div>
+<div class="footer-title" data-i18n="footer.explore">Истражи</div>
+<div class="footer-links">
+<a data-i18n="nav.menu" href="#menu">Мени</a>
+<a data-i18n="nav.rituals" href="#rituals">Ритуали</a>
+<a data-i18n="nav.story" href="#story">Нашата приказна</a>
+<a data-i18n="nav.gallery" href="#gallery">Галерија</a>
+</div>
+</div>
+<div>
+<div class="footer-title" data-i18n="footer.visit">Посети нè</div>
+<div class="footer-links">
+<a href="#contact">Скопје</a>
+<a href="#contact">+389 70 123 456</a>
+<a href="#contact">hello@auracafe.mk</a>
+</div>
+</div>
+<div>
+<div class="footer-title" data-i18n="footer.follow">Следи нè</div>
+<div class="footer-links">
+<a aria-label="Instagram" href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank">Instagram</a>
+<a aria-label="Facebook" href="https://www.facebook.com/" rel="noopener noreferrer" target="_blank">Facebook</a>
+<a aria-label="TikTok" href="https://www.tiktok.com/" rel="noopener noreferrer" target="_blank">TikTok</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<div>© 2026 AURA Coffee House. <span data-i18n="footer.rights">Сите права се задржани.</span></div>
+<div class="footer-socials">
+<span>Скопје · MK</span>
+</div>
+</div>
+</div>
+</footer>
+<button aria-label="Shopping cart" title="Shopping cart" class="cart-button" id="cartButton">
+    🛍
+    <span class="cart-count" id="cartCount">0</span>
+</button>
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-panel" id="cartPanel">
+<div class="cart-header">
+<div class="cart-title" data-i18n="cart.title">Твојата нарачка</div>
+<button class="cart-close" id="cartClose">×</button>
+</div>
+<div class="cart-items" id="cartItems"></div>
+<div class="cart-total">
+<span data-i18n="cart.total">Вкупно</span>
+<span id="cartTotal">0 ден</span>
+</div>
+<button class="checkout-btn" data-i18n="cart.checkout" id="checkoutBtn">Продолжи</button>
+</aside>
+<div class="cookie-banner" id="cookieBanner">
+<div class="cookie-title" data-i18n="cookies.title">Мало известување за приватноста</div>
+<div class="cookie-text" data-i18n="cookies.text">AURA користи локално складирање за да го запомни избраниот јазик и привремената нарачка. Не користиме рекламни cookies.</div>
+<div class="cookie-buttons">
+<button class="cookie-btn cookie-accept" data-i18n="cookies.accept" id="cookieAccept">Во ред</button>
+</div>
+</div>
+<div class="sound-hint" data-i18n="sound.hint" id="soundHint">Притисни ♪ за да влезеш во AURA атмосферата</div>
+<div class="toast" id="toast"></div>
+<audio id="cozyAudio" loop playsinline preload="none"><source src="audio/aura-original-lofi.wav" type="audio/wav"/></audio>
+<div aria-hidden="true" class="aura-modal" id="orderModal">
+<div class="aura-modal-card">
+<button aria-label="Close" class="aura-modal-close" id="orderModalClose">×</button>
+<h3 id="orderModalTitle" style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#f3c879;margin-bottom:15px;">Order Summary</h3>
+<div class="aura-order-list" id="orderModalList"></div>
+<div class="aura-order-total"><span>Total</span><span id="orderModalTotal">0 ден</span></div>
+<div class="aura-modal-actions">
+<button id="orderConfirm" type="button">Confirm Order</button>
+<button class="secondary" id="orderCancel" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="aura-modal" id="articleModal">
+<div class="aura-modal-card">
+<button aria-label="Close" class="aura-modal-close" id="articleModalClose">×</button>
+<h3 id="articleModalTitle" style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#f3c879;margin-bottom:15px;"></h3>
+<p id="articleModalText"></p>
+</div>
+</div>
+
+    <script src="js/main.js" defer></script>
+</body></html>

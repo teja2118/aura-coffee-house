@@ -1,0 +1,4 @@
+Za da ja koristis tocnata pesna, stavi ja MP3 datotekata vo ovaa audio papka i imenuvaj ja:
+Vanilla-Lofi-DJ-LW-LOFI.mp3
+
+Ne mora da menuvash HTML ili JavaScript. Pesnata ne bese prilozena so proektot, pa ne e dodadena avtomatski.
