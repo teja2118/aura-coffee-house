@@ -3,379 +3,365 @@
 <html lang="mk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#171312">
-    <title>AURA Coffee House — Digital Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#160d09">
+    <title>AURA Coffee House</title>
 
     <style>
-        :root {
-            --bg: #171312;
-            --panel: #211a18;
-            --cream: #f9f1e7;
-            --muted: #c6b1a0;
-            --gold: #c2a58b;
-            --gold-dark: #a0836a;
-            --border: rgba(249, 241, 231, .15);
+        * {
+            box-sizing: border-box;
         }
 
-        * { box-sizing: border-box; }
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: #160d09;
+        }
 
         body {
-            margin: 0;
-            min-height: 100vh;
-            background:
-                    radial-gradient(ellipse at top, #35241f 0%, var(--bg) 58%);
-            color: var(--cream);
-            font-family: Arial, sans-serif;
+            font-family: Georgia, serif;
+            color: #f5d4ad;
         }
 
-        header {
+        .menu-viewer {
+            --slide-bg: none;
+            position: fixed;
+            inset: 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            padding: 20px clamp(16px, 5vw, 65px);
-            border-bottom: 1px solid var(--border);
-            background: rgba(23, 19, 18, .85);
+            justify-content: center;
+            overflow: hidden;
+            background: #160d09;
         }
 
-        a { color: inherit; }
-
-        .back {
-            color: var(--muted);
-            font-size: 13px;
-            text-decoration: none;
-        }
-
-        .brand {
-            text-align: center;
-            font-family: Georgia, serif;
-            font-size: 24px;
-            letter-spacing: 4px;
-        }
-
-        .brand small {
-            display: block;
-            margin-top: 5px;
-            color: var(--gold);
-            font-family: Arial, sans-serif;
-            font-size: 9px;
-            letter-spacing: 3px;
-        }
-
-        .languages {
-            display: flex;
-            gap: 7px;
-        }
-
-        .languages button,
-        .arrow {
-            cursor: pointer;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--cream);
-            transition: .2s ease;
-        }
-
-        .languages button {
-            padding: 9px 14px;
-            border-radius: 30px;
-            font-size: 11px;
-        }
-
-        .languages button.active,
-        .languages button:hover {
-            color: #171312;
-            background: var(--gold);
-            border-color: var(--gold);
-        }
-
-        main {
-            width: min(1000px, 100%);
-            padding: 38px 18px 55px;
-            margin: auto;
-        }
-
-        .intro { text-align: center; }
-
-        .eyebrow {
-            color: var(--gold);
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            margin: 14px 0 10px;
-            font-family: Georgia, serif;
-            font-size: clamp(35px, 6vw, 58px);
-            font-weight: 400;
-        }
-
-        .description {
-            margin: 0 auto 28px;
-            max-width: 550px;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .carousel {
-            display: grid;
-            grid-template-columns: 48px minmax(0, 1fr) 48px;
-            align-items: center;
-            gap: clamp(8px, 2vw, 20px);
-        }
-
-        figure {
-            margin: 0;
-            text-align: center;
-            min-width: 0;
+        .menu-viewer::before {
+            content: "";
+            position: absolute;
+            inset: -25px;
+            background-image: var(--slide-bg);
+            background-position: center;
+            background-size: cover;
+            filter: blur(26px) brightness(.4);
+            transform: scale(1.05);
         }
 
         #menuImage {
+            position: relative;
+            z-index: 1;
             display: block;
             width: 100%;
-            max-width: 760px;
-            max-height: 68vh;
-            min-height: 180px;
-            margin: auto;
+            height: 100%;
             object-fit: contain;
-            border-radius: 5px;
-            background: #fff;
-            box-shadow: 0 20px 65px rgba(0, 0, 0, .32);
+            object-position: center;
+            background: transparent;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
-        figcaption {
-            padding: 16px 0 7px;
-            color: var(--gold);
-            font-family: Georgia, serif;
-            font-size: 23px;
-        }
-
-        .arrow {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            color: var(--gold);
-            font-size: 27px;
-        }
-
-        .arrow:hover {
-            background: var(--gold);
-            color: var(--bg);
-        }
-
-        .slide-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 18px;
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        #dots {
+        .top-controls {
+            position: fixed;
+            z-index: 5;
+            top: max(14px, env(safe-area-inset-top));
+            right: max(14px, env(safe-area-inset-right));
             display: flex;
             gap: 8px;
         }
 
-        #dots button {
-            width: 8px;
-            height: 8px;
-            padding: 0;
-            border: 0;
-            border-radius: 100%;
+        .language-button,
+        .home-button,
+        .arrow {
+            border: 1px solid rgba(239, 194, 145, .6);
+            color: #f5d4ad;
+            background: rgba(28, 16, 10, .76);
+            backdrop-filter: blur(8px);
             cursor: pointer;
-            background: #65564e;
+            transition: background .2s, color .2s;
         }
 
-        #dots button.active { background: var(--gold); }
-
-        .footer-note {
-            margin-top: 42px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            color: var(--muted);
-            text-align: center;
-            font-size: 10px;
-            letter-spacing: 1px;
+        .language-button {
+            min-width: 42px;
+            padding: 9px 12px;
+            border-radius: 30px;
+            font-size: 12px;
         }
 
-        @media (max-width: 520px) {
-            header { justify-content: space-between; }
-            .brand {
-                order: -1;
-                width: 100%;
-                font-size: 21px;
+        .language-button.active,
+        .language-button:hover,
+        .home-button:hover,
+        .arrow:hover {
+            background: #d0a477;
+            color: #1b100a;
+        }
+
+        .home-button {
+            position: fixed;
+            z-index: 5;
+            top: max(14px, env(safe-area-inset-top));
+            left: max(14px, env(safe-area-inset-left));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 21px;
+            text-decoration: none;
+        }
+
+        .arrow {
+            position: fixed;
+            z-index: 5;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 43px;
+            height: 58px;
+            border-radius: 30px;
+            font-family: Georgia, serif;
+            font-size: 34px;
+        }
+
+        #previous {
+            left: max(10px, env(safe-area-inset-left));
+        }
+
+        #next {
+            right: max(10px, env(safe-area-inset-right));
+        }
+
+        @media (max-width: 600px) {
+            .home-button {
+                width: 36px;
+                height: 36px;
             }
-            main { padding-top: 27px; }
-            .carousel {
-                grid-template-columns: 35px minmax(0, 1fr) 35px;
-                gap: 7px;
+
+            .language-button {
+                min-width: 36px;
+                padding: 8px 9px;
             }
-            .arrow { width: 35px; height: 35px; font-size: 22px; }
-            #menuImage { max-height: 62vh; }
+
+            .arrow {
+                width: 34px;
+                height: 48px;
+                font-size: 28px;
+            }
+
+            #previous {
+                left: 4px;
+            }
+
+            #next {
+                right: 4px;
+            }
         }
     </style>
 </head>
 
 <body>
-<header>
-    <a class="back" id="backLink" href="./index.html">← AURA Coffee House</a>
+<a href="./index.html"
+   class="home-button"
+   id="homeButton"
+   aria-label="Почетна страница">⌂</a>
 
-    <div class="brand">
-        AURA
-        <small>COFFEE HOUSE</small>
-    </div>
+<div class="top-controls">
+    <button class="language-button"
+            type="button"
+            data-language="mk"
+            aria-label="Македонски">MK</button>
 
-    <div class="languages" aria-label="Choose language">
-        <button type="button" data-lang="mk">MK</button>
-        <button type="button" data-lang="en">EN</button>
-    </div>
-</header>
+    <button class="language-button"
+            type="button"
+            data-language="en"
+            aria-label="English">EN</button>
+</div>
 
-<main>
-    <section class="intro">
-        <div class="eyebrow" id="eyebrow">AURA DIGITAL MENU</div>
-        <h1 id="heading">Нашето мени</h1>
-        <p class="description" id="description">
-            Разгледај ги нашите пијалаци, десерти и солени специјалитети.
-        </p>
-    </section>
-
-    <section class="carousel" aria-label="Menu images">
-        <button class="arrow" id="previous" type="button"
-                aria-label="Previous menu image">‹</button>
-
-        <figure>
-            <img id="menuImage" src="aura_pijaloci.png"
-                 alt="AURA — Пијалаци">
-            <figcaption id="slideTitle">Пијалаци</figcaption>
-        </figure>
-
-        <button class="arrow" id="next" type="button"
-                aria-label="Next menu image">›</button>
-    </section>
-
-    <div class="slide-info">
-        <span id="counter">1 / 3</span>
-        <div id="dots" aria-label="Choose menu image"></div>
-        <span id="hint">Користи ги стрелките за следната слика.</span>
-    </div>
-
-    <footer class="footer-note" id="footerNote">
-        AURA Coffee House · Скопје
-    </footer>
+<main class="menu-viewer">
+    <img id="menuImage"
+         src=""
+         alt="AURA Coffee House menu"
+         draggable="false">
 </main>
 
+<button class="arrow"
+        id="previous"
+        type="button"
+        aria-label="Претходна страница">‹</button>
+
+<button class="arrow"
+        id="next"
+        type="button"
+        aria-label="Следна страница">›</button>
+
 <script>
-    const menuContent = {
-        mk: {
-            title: "Нашето мени",
-            description: "Разгледај ги нашите пијалаци, десерти и солени специјалитети.",
-            hint: "Користи ги стрелките за следната слика.",
-            back: "← Назад на AURA Coffee House",
-            footer: "AURA Coffee House · Скопје",
-            slides: [
-                { src: "aura_pijaloci.png", title: "Пијалаци", alt: "Мени со пијалаци на македонски" },
-                { src: "aura_deseti%20.png", title: "Десерти", alt: "Мени со десерти на македонски" },
-                { src: "aura_soleno.png", title: "Солено мени", alt: "Солено мени на македонски" }
-            ]
-        },
-        en: {
-            title: "Our Menu",
-            description: "Explore our drinks, desserts and savoury specialties.",
-            hint: "Use the arrows to view the next menu image.",
-            back: "← Back to AURA Coffee House",
-            footer: "AURA Coffee House · Skopje",
-            slides: [
-                { src: "aura_drinks.png", title: "Drinks", alt: "AURA drinks menu in English" },
-                { src: "aura_sweets.png", title: "Desserts", alt: "AURA desserts menu in English" },
-                { src: "aura_salty.png", title: "Savoury Menu", alt: "AURA savoury menu in English" }
-            ]
-        }
+
+
+    const pages = {
+        mk: [
+            {
+                src: "images/menu_first.png",
+                alt: "AURA Coffee House — Мени"
+            },
+            {
+                src: "images/aura_pijaloci.png",
+                alt: "Кафе и пијалаци"
+            },
+            {
+                src: "images/aura_deseti%20.png",
+                alt: "Топло чоколадо и десерти"
+            },
+            {
+                src: "images/aura_soleno.png",
+                alt: "Вода, сокови и солено мени"
+            },
+            {
+                src: "images/menu_mkdty.png",
+                alt: "Ви благодариме за посетата"
+            }
+        ],
+
+        en: [
+            {
+                src: "images/menu_first.png",
+                alt: "AURA Coffee House — Menu"
+            },
+            {
+                src: "images/aura_drinks.png",
+                alt: "Coffee, drinks and matcha"
+            },
+            {
+                src: "images/aura_sweets.png",
+                alt: "Hot chocolate and desserts"
+            },
+            {
+                src: "images/aura_salty.png",
+                alt: "Water, juices and savoury food"
+            },
+            {
+                src: "images/menu_angty.png",
+                alt: "Thank you for visiting AURA Coffee House"
+            }
+        ]
     };
 
-    const params = new URLSearchParams(window.location.search);
-    let language = params.get("lang") === "en" ? "en" : "mk";
-    let slideIndex = 0;
 
     const image = document.getElementById("menuImage");
-    const title = document.getElementById("heading");
-    const description = document.getElementById("description");
-    const slideTitle = document.getElementById("slideTitle");
-    const dots = document.getElementById("dots");
+    const viewer = document.querySelector(".menu-viewer");
+    const previous = document.getElementById("previous");
+    const next = document.getElementById("next");
+    const home = document.getElementById("homeButton");
 
-    function renderMenu() {
-        const content = menuContent[language];
-        const slide = content.slides[slideIndex];
+    const params = new URLSearchParams(location.search);
+
+    let language = params.get("lang") === "en" ? "en" : "mk";
+    let pageIndex = 0;
+
+    function renderPage() {
+        const page = pages[language][pageIndex];
+
+        image.onerror = function () {
+            image.alt = language === "mk"
+                ? "Сликата не е пронајдена. Провери го името на фајлот."
+                : "Image not found. Check the filename.";
+        };
+
+        image.src = page.src;
+        image.alt = page.alt;
+
+        viewer.style.setProperty(
+            "--slide-bg",
+            'url("' + page.src + '")'
+        );
 
         document.documentElement.lang = language;
-        document.title = "AURA Coffee House — " + content.title;
-        title.textContent = content.title;
-        description.textContent = content.description;
-        slideTitle.textContent = slide.title;
-        image.src = slide.src;
-        image.alt = slide.alt;
 
-        document.getElementById("eyebrow").textContent =
-            language === "mk" ? "AURA ДИГИТАЛНО МЕНИ" : "AURA DIGITAL MENU";
-        document.getElementById("hint").textContent = content.hint;
-        document.getElementById("backLink").textContent = content.back;
-        document.getElementById("footerNote").textContent = content.footer;
-        document.getElementById("counter").textContent =
-            (slideIndex + 1) + " / " + content.slides.length;
+        document.title = language === "mk"
+            ? "AURA Coffee House — Дигитално мени"
+            : "AURA Coffee House — Digital Menu";
 
-        document.querySelectorAll("[data-lang]").forEach(button => {
-            button.classList.toggle("active", button.dataset.lang === language);
-            button.setAttribute("aria-pressed", String(button.dataset.lang === language));
+        home.setAttribute(
+            "aria-label",
+            language === "mk"
+                ? "Почетна страница"
+                : "Home page"
+        );
+
+        previous.setAttribute(
+            "aria-label",
+            language === "mk" ? "Претходна страница" : "Previous page"
+        );
+
+        next.setAttribute(
+            "aria-label",
+            language === "mk" ? "Следна страница" : "Next page"
+        );
+
+        document.querySelectorAll("[data-language]").forEach(button => {
+            const selected = button.dataset.language === language;
+
+            button.classList.toggle("active", selected);
+            button.setAttribute("aria-pressed", String(selected));
         });
 
-        dots.innerHTML = "";
-        content.slides.forEach((item, index) => {
-            const dot = document.createElement("button");
-            dot.type = "button";
-            dot.classList.toggle("active", index === slideIndex);
-            dot.setAttribute("aria-label", item.title);
-            dot.addEventListener("click", () => {
-                slideIndex = index;
-                renderMenu();
-            });
-            dots.appendChild(dot);
+        const updatedURL = new URL(location.href);
+        updatedURL.searchParams.set("lang", language);
+
+        history.replaceState({}, "", updatedURL);
+    }
+
+    function nextPage() {
+        pageIndex = (pageIndex + 1) % pages[language].length;
+        renderPage();
+    }
+
+    function previousPage() {
+        pageIndex =
+            (pageIndex - 1 + pages[language].length)
+            % pages[language].length;
+
+        renderPage();
+    }
+
+    document.querySelectorAll("[data-language]").forEach(button => {
+        button.addEventListener("click", () => {
+            language = button.dataset.language;
+            renderPage();
         });
-    }
-
-    function changeLanguage(nextLanguage) {
-        language = nextLanguage;
-        slideIndex = 0;
-
-        const url = new URL(window.location.href);
-        url.searchParams.set("lang", language);
-        window.history.replaceState({}, "", url);
-
-        renderMenu();
-    }
-
-    document.querySelectorAll("[data-lang]").forEach(button => {
-        button.addEventListener("click", () => changeLanguage(button.dataset.lang));
     });
 
-    document.getElementById("previous").addEventListener("click", () => {
-        slideIndex = (slideIndex + menuContent[language].slides.length - 1)
-            % menuContent[language].slides.length;
-        renderMenu();
+    previous.addEventListener("click", previousPage);
+    next.addEventListener("click", nextPage);
+
+    image.addEventListener("click", () => {
+        if (pageIndex === 0) nextPage();
     });
 
-    document.getElementById("next").addEventListener("click", () => {
-        slideIndex = (slideIndex + 1) % menuContent[language].slides.length;
-        renderMenu();
+    document.addEventListener("keydown", event => {
+        if (event.key === "ArrowRight") nextPage();
+        if (event.key === "ArrowLeft") previousPage();
     });
 
-    renderMenu();
+    let touchStartX = 0;
+
+    document.addEventListener("touchstart", event => {
+        touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener("touchend", event => {
+        const difference =
+            event.changedTouches[0].clientX - touchStartX;
+
+        if (Math.abs(difference) < 60) return;
+
+        if (difference < 0) nextPage();
+        else previousPage();
+    }, { passive: true });
+
+    renderPage();
 </script>
 </body>
 </html>
