@@ -416,53 +416,74 @@
 </div>
 </section>
 <section class="section team" id="team">
-<div class="container">
-<div class="team-header">
-<div>
-<div class="eyebrow reveal">
-<span data-i18n="team.eyebrow">Луѓето зад AURA</span>
-</div>
-<h2 class="section-title reveal reveal-delay-1">
-<span data-i18n="team.title1">Запознај</span>
-<br/>
-<span data-i18n="team.title2">го тимот.</span>
-</h2>
-</div>
-<p class="section-description reveal" data-i18n="team.description">
+    <div class="container">
+        <div class="team-header">
+            <div>
+                <div class="eyebrow reveal">
+                    <span data-i18n="team.eyebrow">Луѓето зад AURA</span>
+                </div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    <span data-i18n="team.title1">Запознај</span>
+                    <br>
+                    <span data-i18n="team.title2">го тимот.</span>
+                </h2>
+            </div>
+            <p class="section-description reveal" data-i18n="team.description">
                 Четири луѓе, една љубов кон кафето, деталите и добрата енергија.
             </p>
-</div>
-<div class="team-grid">
-<article class="team-card reveal">
-<img alt="Teodora" class="team-image" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
-<div class="team-info">
-<div class="team-name">Teodora</div>
-<div class="team-role" data-i18n="team.role.barista">Главен бариста</div>
-</div>
-</article>
-<article class="team-card reveal reveal-delay-1">
-<img alt="Elena" class="team-image" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
-<div class="team-info">
-<div class="team-name">Elena</div>
-<div class="team-role" data-i18n="team.role.host">Хост и креатива</div>
-</div>
-</article>
-<article class="team-card reveal reveal-delay-2">
-<img alt="Dejvid" class="team-image" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
-<div class="team-info">
-<div class="team-name">Dejvid</div>
-<div class="team-role" data-i18n="team.role.coffee">Кафе специјалист</div>
-</div>
-</article>
-<article class="team-card reveal reveal-delay-3">
-<img alt="Mihail" class="team-image" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" loading="eager" decoding="async" referrerpolicy="no-referrer"/>
-<div class="team-info">
-<div class="team-name">Mihail</div>
-<div class="team-role" data-i18n="team.role.kitchen">Кујна и пециво</div>
-</div>
-</article>
-</div>
-</div>
+        </div>
+
+        <div class="team-grid">
+            <article class="team-card reveal">
+                <img
+                        alt="Теодора"
+                        class="team-image"
+                        src="images/teodora.png"
+                        loading="eager"
+                        decoding="async">
+                <div class="team-info">
+                    <div class="team-name" data-name-mk="Теодора" data-name-en="Teodora">Теодора</div>
+                    <div class="team-role" data-i18n="team.role.barista">Главен бариста</div>
+                </div>
+            </article>
+
+            <article class="team-card reveal reveal-delay-1">
+                <img
+                        alt="Елена"
+                        class="team-image"
+                        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1000&q=85"
+                        loading="lazy">
+                <div class="team-info">
+                    <div class="team-name" data-name-mk="Елена" data-name-en="Elena">Елена</div>
+                    <div class="team-role" data-i18n="team.role.host">Хост и креатива</div>
+                </div>
+            </article>
+
+            <article class="team-card reveal reveal-delay-2">
+                <img
+                        alt="Дејвид"
+                        class="team-image"
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1000&q=85"
+                        loading="lazy">
+                <div class="team-info">
+                    <div class="team-name" data-name-mk="Дејвид" data-name-en="David">Дејвид</div>
+                    <div class="team-role" data-i18n="team.role.coffee">Кафе специјалист</div>
+                </div>
+            </article>
+
+            <article class="team-card reveal reveal-delay-3">
+                <img
+                        alt="Михаил"
+                        class="team-image"
+                        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1000&q=85"
+                        loading="lazy">
+                <div class="team-info">
+                    <div class="team-name" data-name-mk="Михаил" data-name-en="Mihail">Михаил</div>
+                    <div class="team-role" data-i18n="team.role.kitchen">Кујна и пециво</div>
+                </div>
+            </article>
+        </div>
+    </div>
 </section>
 <section class="section" id="journal">
 <div class="container">
@@ -572,7 +593,7 @@
 </div>
 <div class="contact-row reveal reveal-delay-2">
 <div class="contact-label" data-i18n="contact.email">Е-пошта</div>
-<div class="contact-value"><a href="mailto:hello@auracafe.mk">hello@auracafe.mk</a></div>
+<div class="contact-value"><a href="mailto:auracafehouse@gmail.com">auracafehouse@gmail.com</a></div>
 </div>
 <div class="contact-row reveal reveal-delay-3">
 <div class="contact-label" data-i18n="contact.hours">Работно време</div>
@@ -647,7 +668,7 @@
 <div class="footer-links">
 <a href="#contact">Скопје</a>
 <a href="#contact">+389 70 123 456</a>
-<a href="#contact">hello@auracafe.mk</a>
+<a href="#contact">auracafehouse@gmail.com</a>
 </div>
 </div>
 <div>
