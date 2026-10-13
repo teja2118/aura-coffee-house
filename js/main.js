@@ -308,10 +308,10 @@
             "cart.title": "Твојата нарачка",
             "cart.total": "Вкупно",
             "cart.checkout": "Продолжи",
-            "cookies.title": "Вашата приватност ни е важна",
-            "cookies.text": "AURA го користи локалното складирање во вашиот прелистувач за да ги запомни вашите поставки и избори. Информациите внесени во демо-нарачки, резервации и контакт-формулари остануваат на вашиот уред и не се испраќаат на сервер. AURA не користи рекламни колачиња.",
-            "cookies.accept": "Прифати",
-            "cookies.settings": "Управувај со поставките",
+            "cookies.title": "Мало известување за приватноста",
+            "cookies.text": "Ова демо ги зачувува изборот на јазик, тест-нарачките, резервациите и контакт-пораките само во овој прелистувач. Ништо не се испраќа до сервер; не користиме рекламни cookies.",
+            "cookies.accept": "Во ред",
+            "cookies.settings": "Само неопходни",
             "special.kicker": "AURA ексклузивно",
             "special.title": "Нешто посебно",
             "special.intro": "Четири посебни AURA доживувања што секоја посета на кафе ја претвораат во убав момент. Разгледајте го нашиот QR систем за дигитално мени подолу за целосна понуда и детални информации.",
@@ -345,6 +345,20 @@
         currentLanguage = language;
         localStorage.setItem("auraLanguage", language);
         document.documentElement.lang = language;
+        document.querySelectorAll(".team-name").forEach((element, index) => {
+            const names = [
+                { mk: "Теодора", en: "Teodora" },
+                { mk: "Елена", en: "Elena" },
+                { mk: "Дејвид", en: "David" },
+                { mk: "Михаил", en: "Mihail" }
+            ];
+
+            if (names[index]) {
+                element.textContent = language === "mk"
+                    ? names[index].mk
+                    : names[index].en;
+            }
+        });
         document.querySelectorAll('.aura-modal.open').forEach(modal => modal.classList.remove('open'));
         document.querySelectorAll("[data-i18n]").forEach(element => {
             const key = element.getAttribute("data-i18n");
@@ -562,17 +576,95 @@
     document.getElementById("orderCancel").addEventListener("click", () => { orderModal.classList.remove("open"); orderModal.setAttribute("aria-hidden", "true"); });
     document.getElementById("orderModalClose").addEventListener("click", () => { orderModal.classList.remove("open"); orderModal.setAttribute("aria-hidden", "true"); });
     orderModal.addEventListener("click", e => { if (e.target === orderModal) { orderModal.classList.remove("open"); orderModal.setAttribute("aria-hidden", "true"); } });
-    document.getElementById("orderConfirm").addEventListener("click", () => {
-        const order = { id: `AURA-${Date.now()}`, items: [...cart], total: cart.reduce((sum, item) => sum + item.price, 0), createdAt: new Date().toISOString() };
-        localStorage.setItem("auraLastOrder", JSON.stringify(order));
-        cart = [];
-        localStorage.setItem("auraCart_local_images_v2", JSON.stringify(cart));
-        updateCart();
-        orderModal.classList.remove("open");
-        orderModal.setAttribute("aria-hidden", "true");
-        showToast(currentLanguage === "mk" ? `Демо-нарачката ${order.id} е зачувана само во овој прелистувач.` : `Demo order ${order.id} was saved only in this browser.`);
-        closeCart();
+
+    document.getElementById("orderConfirm").addEventListener("click", async () => {
+        const button = document.getElementById("orderConfirm");
+
+        if (!cart.length) {
+            showToast(currentLanguage === "mk"
+                ? "Кошничката е празна."
+                : "Your cart is empty.");
+            return;
+        }
+
+        const customerName = prompt(
+            currentLanguage === "mk"
+                ? "Внеси го твоето име:"
+                : "Enter your name:"
+        );
+
+        if (!customerName || !customerName.trim()) {
+            showToast(currentLanguage === "mk"
+                ? "Внеси име за да продолжиш."
+                : "Please enter your name.");
+            return;
+        }
+
+        const customerEmail = prompt(
+            currentLanguage === "mk"
+                ? "Внеси е-пошта:"
+                : "Enter your email:"
+        );
+
+        if (!customerEmail || !customerEmail.trim()) {
+            showToast(currentLanguage === "mk"
+                ? "Внеси е-пошта за да продолжиш."
+                : "Please enter your email.");
+            return;
+        }
+
+        const items = cart.map(item => ({
+            product_name: item.name,
+            quantity: Number(item.qty || 1)
+        }));
+
+        button.disabled = true;
+
+        try {
+            const response = await fetch("http://localhost:3000/api/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    customer_name: customerName.trim(),
+                    customer_email: customerEmail.trim(),
+                    items
+                })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Order failed");
+            }
+
+            cart = [];
+            localStorage.setItem(
+                "auraCart_local_images_v2",
+                JSON.stringify(cart)
+            );
+
+            updateCart();
+            orderModal.classList.remove("open");
+            orderModal.setAttribute("aria-hidden", "true");
+
+            showToast(currentLanguage === "mk"
+                ? `Нарачката #${result.order.id} е зачувана!`
+                : `Order #${result.order.id} was saved!`);
+
+            closeCart();
+        } catch (error) {
+            console.error("Order error:", error);
+
+            showToast(currentLanguage === "mk"
+                ? "Нарачката не успеа. Провери дали backend-от работи."
+                : "Order failed. Check whether the backend is running.");
+        } finally {
+            button.disabled = false;
+        }
     });
+
 
     let toastTimer;
     function showToast(message) {
@@ -871,7 +963,7 @@
         }
 
         function qr() {
-            const menuUrl = 'https://teja2118.github.io/aura-coffee-house/menu.html?lang='     + (currentLanguage === 'en' ? 'en' : 'mk');
+            const menuUrl = window.location.href.split('#')[0] + '#menu';
             const qrImage = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=' + encodeURIComponent(menuUrl);
             modal('auraQR', t('special.digital.title'), '<p class="aura-sub">' + t('special.qrHint') + '</p><img src="' + qrImage + '" alt="AURA menu QR code" style="display:block;width:240px;height:240px;max-width:100%;margin:18px auto;background:#fff;padding:10px;border-radius:12px"><p class="aura-sub" style="text-align:center;margin-bottom:0">' + t('special.digital.title') + '</p>');
         }
