@@ -871,7 +871,7 @@
         }
 
         function qr() {
-            const menuUrl = window.location.href.split('#')[0] + '#menu';
+            const menuUrl = 'https://teja2118.github.io/aura-coffee-house/menu.html?lang='     + (currentLanguage === 'en' ? 'en' : 'mk');
             const qrImage = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=' + encodeURIComponent(menuUrl);
             modal('auraQR', t('special.digital.title'), '<p class="aura-sub">' + t('special.qrHint') + '</p><img src="' + qrImage + '" alt="AURA menu QR code" style="display:block;width:240px;height:240px;max-width:100%;margin:18px auto;background:#fff;padding:10px;border-radius:12px"><p class="aura-sub" style="text-align:center;margin-bottom:0">' + t('special.digital.title') + '</p>');
         }
