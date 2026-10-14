@@ -629,8 +629,7 @@ document.getElementById("orderCancel").addEventListener("click", () => { orderMo
 document.getElementById("orderModalClose").addEventListener("click", () => { orderModal.classList.remove("open"); orderModal.setAttribute("aria-hidden", "true"); });
 orderModal.addEventListener("click", e => { if (e.target === orderModal) { orderModal.classList.remove("open"); orderModal.setAttribute("aria-hidden", "true"); } });
 
-document.getElementById("orderConfirm").addEventListener("click", async () => {
-    const button = document.getElementById("orderConfirm");
+document.getElementById("orderConfirm").addEventListener("click", () => {
     const nameInput = document.getElementById("orderCustomerName");
     const emailInput = document.getElementById("orderCustomerEmail");
 
@@ -649,51 +648,22 @@ document.getElementById("orderConfirm").addEventListener("click", async () => {
         return;
     }
 
-    const items = cart.map(item => ({
-        product_name: item.name,
-        quantity: Number(item.qty || 1)
-    }));
+    // Front-end demo confirmation: no server request is made.
+    // Clear the demo cart, close both panels, and return to the visitor's previous position.
+    cart = [];
+    localStorage.setItem("auraCart_local_images_v2", JSON.stringify(cart));
+    updateCart();
+    if (nameInput) nameInput.value = "";
+    if (emailInput) emailInput.value = "";
 
-    button.disabled = true;
-    button.textContent = t("cart.processing");
+    orderModal.classList.remove("open");
+    orderModal.setAttribute("aria-hidden", "true");
+    closeCart();
 
-    try {
-        const response = await fetch("http://localhost:3000/api/orders", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                customer_name: customerName,
-                customer_email: customerEmail,
-                items
-            })
-        });
-
-        let result = {};
-        try { result = await response.json(); } catch (_) { /* Response may be empty */ }
-        if (!response.ok) throw new Error(result.error || "Order failed");
-
-        cart = [];
-        localStorage.setItem("auraCart_local_images_v2", JSON.stringify(cart));
-        updateCart();
-        if (nameInput) nameInput.value = "";
-        if (emailInput) emailInput.value = "";
-        orderModal.classList.remove("open");
-        orderModal.setAttribute("aria-hidden", "true");
-        closeCart();
-
-        // Return to the exact section the visitor was viewing and show a clear success message.
-        window.requestAnimationFrame(() => {
-            window.scrollTo({ top: orderReturnScrollY, behavior: "auto" });
-        });
-        const orderId = result && result.order && result.order.id;
-        showToast(orderId ? `${t("order.success")} (#${orderId})` : t("order.success"), "success");
-    } catch (error) {
-        console.error("Order error:", error);
-        showToast(t("order.failure"), "error");
-    } finally {
-        button.disabled = false;
-        button.textContent = t("cart.confirmOrder");
-    }
+    window.requestAnimationFrame(() => {
+        window.scrollTo({ top: orderReturnScrollY, behavior: "auto" });
+        showToast(t("order.success"), "success");
+    });
 });
 
 
