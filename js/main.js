@@ -703,7 +703,7 @@ function showToast(message) {
 
 // Cookie notice: the site uses essential local storage for language/cart only.
 const cookieBanner = document.getElementById("cookieBanner");
-const cookieChoice = localStorage.getItem("auraCookies");
+const cookieChoice = localStorage.getItem("auraCookies_v2");
 const cookieAcceptButton = document.getElementById("cookieAccept");
 const cookieRejectButton = document.getElementById("cookieReject");
 
@@ -713,7 +713,7 @@ if (cookieBanner && !cookieChoice) {
 
 function saveCookieChoice(choice) {
     try {
-        localStorage.setItem("auraCookies", choice);
+        localStorage.setItem("auraCookies_v2", choice);
     } catch (error) {
         console.warn("Could not save cookie preference:", error);
     }
