@@ -431,7 +431,7 @@ document.querySelectorAll("[data-mobile-link]").forEach(link => {
 
 const filterButtons = document.querySelectorAll(".filter-btn");
 
-// Group menu items: coffee first, matcha second, tea last.
+const filterButtons = document.querySelectorAll(".filter-btn");
 const menuGrid = document.getElementById("menuGrid");
 
 if (menuGrid) {
@@ -445,13 +445,52 @@ if (menuGrid) {
         menuGrid.querySelectorAll(".menu-card")
     );
 
-    cards.sort((a, b) => {
-        const orderA = categoryOrder[a.dataset.category] ?? 99;
-        const orderB = categoryOrder[b.dataset.category] ?? 99;
-        return orderA - orderB;
-    });
+    // Кафе прво, матча второ, чај последен.
+    cards.sort((a, b) =>
+        (categoryOrder[a.dataset.category] ?? 99) -
+        (categoryOrder[b.dataset.category] ?? 99)
+    );
 
     cards.forEach(card => menuGrid.appendChild(card));
+
+    function showMenu(filter = "all") {
+        filterButtons.forEach(button => {
+            button.classList.toggle(
+                "active",
+                button.dataset.filter === filter
+            );
+        });
+
+        cards.forEach(card => {
+            const visible =
+                filter === "all" ||
+                card.dataset.category === filter;
+
+            card.style.setProperty(
+                "display",
+                visible ? "flex" : "none",
+                "important"
+            );
+
+            if (visible) {
+                card.style.setProperty("opacity", "1", "important");
+                card.style.setProperty(
+                    "transform",
+                    "translateY(0)",
+                    "important"
+                );
+            }
+        });
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            showMenu(button.dataset.filter);
+        });
+    });
+
+    // При секое отворање прикажи ги сите производи.
+    showMenu("all");
 }
 
 const menuCards = document.querySelectorAll(".menu-card");
