@@ -1852,7 +1852,9 @@
         .menu-more-btn span { color:var(--gold); font-size:17px; transition:transform .3s ease; }
         .menu-more-btn:hover { background:var(--gold); color:#201714; transform:translateY(-2px); }
         .menu-more-btn:hover span { color:#201714; transform:translateX(4px); }
-        .menu-card.menu-hidden { display:none !important; }
+                .menu-card.menu-hidden {
+                    display: flex !important;
+                }
         .sound-toggle.is-playing { border-color:var(--gold); color:var(--gold); }
         .sound-toggle.is-playing .sound-icon { animation:auraSoundPulse 1.4s ease-in-out infinite; }
         @keyframes auraSoundPulse { 0%,100%{opacity:.55} 50%{opacity:1} }
