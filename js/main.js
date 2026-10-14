@@ -159,6 +159,11 @@ const translations = {
         "cookies.text": "AURA uses essential browser storage to remember your language and keep your cart working. We do not use analytics or advertising cookies. Essential storage remains active whichever option you choose.",
         "cookies.accept": "I agree",
         "cookies.reject": "I disagree",
+        "qr.title": "Digital Menu",
+        "qr.description": "Scan the code to open the AURA menu directly.",
+        "qr.open": "Open menu",
+        "qr.close": "Close QR code",
+        "contact.demoSuccess": "Your message has been sent successfully.",
         "special.kicker": "AURA exclusive",
         "special.title": "Something Special",
         "special.intro": "Four little AURA experiences, made to turn an ordinary coffee visit into a moment worth remembering. Explore our digital menu QR system below for complete offerings.",
@@ -177,7 +182,7 @@ const translations = {
         "special.rewards.text": "Collect coffee moments with your personal AURA stamp card and unlock a little reward after six visits.",
         "special.digital.title": "Digital Menu QR & Guide",
         "special.digital.text": "Scan the QR code to open the full AURA digital menu and explore our comprehensive selection.",
-        "special.builder.sub": "Create your drink exactly the way you like it.", "special.base":"Base", "special.milk":"Milk", "special.extra":"Extra", "special.yourDrink":"Your drink", "special.addCart":"Add to AURA Cart", "special.reserve.sub":"Plan your AURA moment in advance.", "special.name":"Name", "special.email":"Email", "special.yourEmail":"Your email", "special.guests":"Guests", "special.date":"Date", "special.time":"Time", "special.request":"Special request", "special.yourName":"Your name", "special.requestPlaceholder":"Window seat, birthday, etc.", "special.confirmReservation":"Confirm Reservation", "special.fillReservation":"Please fill in your name, email, date and time.", "special.confirmed":"Reservation saved (demo)", "special.reference":"Reference:", "special.ready":"This demo does not send the reservation to staff.", "special.rewards.sub":"A little thank-you for every coffee moment.", "special.nextCoffee":"Your next coffee is on us!", "special.rewardAlmost":"Two more moments and your reward is ready.", "special.stamps":"stamps", "special.addStamp":"Add a coffee stamp", "special.digital.sub": "Our digital menu contains complete beverage lists, ingredient breakdowns, barista notes, and pricing.",
+        "special.builder.sub": "Create your drink exactly the way you like it.", "special.base":"Base", "special.milk":"Milk", "special.extra":"Extra", "special.yourDrink":"Your drink", "special.addCart":"Add to AURA Cart", "special.reserve.sub":"Plan your AURA moment in advance.", "special.name":"Name", "special.email":"Email", "special.yourEmail":"Your email", "special.guests":"Guests", "special.date":"Date", "special.time":"Time", "special.request":"Special request", "special.yourName":"Your name", "special.requestPlaceholder":"Window seat, birthday, etc.", "special.confirmReservation":"Confirm Reservation", "special.fillReservation":"Please fill in your name, email, date and time.", "special.confirmed":"Reservation saved in demo mode", "special.reference":"Reference:", "special.ready":"Demo reservations are not sent to the team.", "special.rewards.sub":"A little thank-you for every coffee moment.", "special.nextCoffee":"Your next coffee is on us!", "special.rewardAlmost":"Two more moments and your reward is ready.", "special.stamps":"stamps", "special.addStamp":"Add a coffee stamp", "special.digital.sub": "Our digital menu contains complete beverage lists, ingredient breakdowns, barista notes, and pricing.",
         "sound.hint": "Tap ♪ to enter the AURA atmosphere"
     },
     mk: {
@@ -337,6 +342,11 @@ const translations = {
         "cookies.text": "AURA користи неопходно складирање во прелистувачот за да го запомни јазикот и да ја одржува кошничката. Не користиме аналитички или рекламни колачиња. Неопходното складирање останува активно без оглед на твојот избор.",
         "cookies.accept": "Се согласувам",
         "cookies.reject": "Не се согласувам",
+        "qr.title": "Дигитално мени",
+        "qr.description": "Скенирај го кодот за директно да го отвориш менито на AURA.",
+        "qr.open": "Отвори мени",
+        "qr.close": "Затвори QR-код",
+        "contact.demoSuccess": "Пораката е испратена успешно.",
         "special.kicker": "AURA ексклузивно",
         "special.title": "Нешто посебно",
         "special.intro": "Четири посебни AURA доживувања што секоја посета на кафе ја претвораат во убав момент. Разгледајте го нашиот QR систем за дигитално мени подолу за целосна понуда и детални информации.",
@@ -355,7 +365,7 @@ const translations = {
         "special.rewards.text": "Собирај AURA печати со секое кафе и отклучи мала награда по шест посети.",
         "special.digital.title": "Дигитално мени QR и водич",
         "special.digital.text": "Скенирај го QR-кодот за целосно дигитално искуство: комплетен каталог на пијалаци, сезонски напитоци, цени во денари, белешки од баристите и нашата приказна.",
-        "special.builder.sub": "Создади го својот пијалак токму онака како што го сакаш.", "special.base":"Основа", "special.milk":"Млеко", "special.extra":"Додаток", "special.yourDrink":"Твојот пијалак", "special.addCart":"Додај во AURA нарачка", "special.reserve.sub":"Испланирај го AURA моментот однапред.", "special.name":"Име", "special.email":"Е-пошта", "special.yourEmail":"Твојата е-пошта", "special.guests":"Гости", "special.date":"Датум", "special.time":"Време", "special.request":"Посебно барање", "special.yourName":"Твоето име", "special.requestPlaceholder":"Место до прозорец, роденден итн.", "special.confirmReservation":"Потврди резервација", "special.fillReservation":"Внеси име, е-пошта, датум и време.", "special.confirmed":"Резервацијата е зачувана (демо)", "special.reference":"Референца:", "special.ready":"Ова демо не ја испраќа резервацијата до персоналот.", "special.rewards.sub":"Мала благодарност за секој AURA момент.", "special.nextCoffee":"Следното кафе е на наша сметка!", "special.rewardAlmost":"Уште два моменти и наградата е подготвена.", "special.stamps":"печати", "special.addStamp":"Додај печат за кафе", "special.digital.sub": "Нашето дигитално мени содржи комплетни списоци на пијалаци, детали за состојките, белешки од баристите и цени.",
+        "special.builder.sub": "Создади го својот пијалак токму онака како што го сакаш.", "special.base":"Основа", "special.milk":"Млеко", "special.extra":"Додаток", "special.yourDrink":"Твојот пијалак", "special.addCart":"Додај во AURA нарачка", "special.reserve.sub":"Испланирај го AURA моментот однапред.", "special.name":"Име", "special.email":"Е-пошта", "special.yourEmail":"Твојата е-пошта", "special.guests":"Гости", "special.date":"Датум", "special.time":"Време", "special.request":"Посебно барање", "special.yourName":"Твоето име", "special.requestPlaceholder":"Место до прозорец, роденден итн.", "special.confirmReservation":"Потврди резервација", "special.fillReservation":"Внеси име, е-пошта, датум и време.", "special.confirmed":"Резервацијата е зачувана во демо-режим", "special.reference":"Референца:", "special.ready":"Демо-резервациите не се испраќаат до персоналот.", "special.rewards.sub":"Мала благодарност за секој AURA момент.", "special.nextCoffee":"Следното кафе е на наша сметка!", "special.rewardAlmost":"Уште два моменти и наградата е подготвена.", "special.stamps":"печати", "special.addStamp":"Додај печат за кафе", "special.digital.sub": "Нашето дигитално мени содржи комплетни списоци на пијалаци, детали за состојките, белешки од баристите и цени.",
         "sound.hint": "Притисни ♪ за да влезеш во AURA атмосферата"
     }
 };
@@ -396,6 +406,11 @@ function applyLanguage(language) {
         if (value) {
             input.placeholder = value;
         }
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach(element => {
+        const key = element.getAttribute("data-i18n-aria-label");
+        const translatedLabel = translations[language] && translations[language][key];
+        if (translatedLabel) element.setAttribute("aria-label", translatedLabel);
     });
     document.querySelectorAll(".lang-btn").forEach(button => {
         button.classList.toggle("active", button.dataset.lang === language);
@@ -720,7 +735,7 @@ document.getElementById("contactForm").addEventListener("submit", event => {
     saved.push(data);
     localStorage.setItem("auraMessages", JSON.stringify(saved));
     form.reset();
-    showToast(currentLanguage === "mk" ? "Пораката е зачувана само во овој прелистувач (демо); не е испратена." : "Demo message saved only in this browser; it was not sent.");
+    showToast(t("contact.demoSuccess"));
 });
 
 const soundToggle = document.getElementById("soundToggle");
