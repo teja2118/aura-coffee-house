@@ -29,6 +29,17 @@
 
 
     <link rel="stylesheet" href="css/style.css"/>
+<style>
+/* Small additions for the revised cookie notice and single-step checkout. */
+.cookie-buttons { display:flex; flex-wrap:wrap; gap:10px; }
+.cookie-buttons .cookie-btn { cursor:pointer; }
+.cookie-buttons .cookie-reject { background:transparent; border:1px solid currentColor; color:inherit; }
+.order-customer-fields { display:grid; grid-template-columns:1fr; gap:13px; margin:18px 0 12px; }
+.order-customer-fields .form-group { margin:0; }
+.order-customer-fields .form-label { display:block; margin-bottom:7px; }
+.order-customer-fields .form-input { display:block; width:100%; box-sizing:border-box; }
+#orderModal .aura-modal-card { max-height:calc(100vh - 32px); overflow-y:auto; }
+</style>
 </head>
 <body>
 <div class="loader" id="loader">
@@ -705,11 +716,12 @@
 </div>
 <button class="checkout-btn" data-i18n="cart.checkout" id="checkoutBtn">Продолжи</button>
 </aside>
-<div class="cookie-banner" id="cookieBanner">
-<div class="cookie-title" data-i18n="cookies.title">Вашата приватност ни е важна</div>
-<div class="cookie-text" data-i18n="cookies.text">AURA користи локално складирање во вашиот прелистувач за да ги запомни вашите поставки и избори.</div>
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie preferences">
+<div class="cookie-title" data-i18n="cookies.title">Твојата приватност ни е важна</div>
+<div class="cookie-text" data-i18n="cookies.text">AURA користи неопходно складирање во прелистувачот за да го запомни јазикот и да ја одржува кошничката. Не користиме аналитички или рекламни колачиња. Неопходното складирање останува активно без оглед на твојот избор.</div>
 <div class="cookie-buttons">
-<button class="cookie-btn cookie-accept" data-i18n="cookies.accept" id="cookieAccept">Во ред</button>
+<button type="button" class="cookie-btn cookie-accept" data-i18n="cookies.accept" id="cookieAccept">Се согласувам</button>
+<button type="button" class="cookie-btn cookie-reject" data-i18n="cookies.reject" id="cookieReject">Не се согласувам</button>
 </div>
 </div>
 <div class="sound-hint" data-i18n="sound.hint" id="soundHint">Притисни ♪ за да влезеш во AURA атмосферата</div>
@@ -718,12 +730,22 @@
 <div aria-hidden="true" class="aura-modal" id="orderModal">
 <div class="aura-modal-card">
 <button aria-label="Close" class="aura-modal-close" id="orderModalClose">×</button>
-<h3 id="orderModalTitle" style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#f3c879;margin-bottom:15px;">Order Summary</h3>
+<h3 id="orderModalTitle" data-i18n="cart.orderSummary" style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#f3c879;margin-bottom:15px;">Преглед на нарачката</h3>
 <div class="aura-order-list" id="orderModalList"></div>
-<div class="aura-order-total"><span>Total</span><span id="orderModalTotal">0 ден</span></div>
+<div class="aura-order-total"><span data-i18n="cart.total">Вкупно</span><span id="orderModalTotal">0 ден</span></div>
+<div class="order-customer-fields">
+  <div class="form-group">
+    <label class="form-label" for="orderCustomerName" data-i18n="checkout.name">Име и презиме</label>
+    <input class="form-input" id="orderCustomerName" name="customerName" type="text" autocomplete="name" required data-placeholder-en="Enter your full name" data-placeholder-mk="Внеси име и презиме" placeholder="Внеси име и презиме">
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="orderCustomerEmail" data-i18n="checkout.email">Е-пошта</label>
+    <input class="form-input" id="orderCustomerEmail" name="customerEmail" type="email" autocomplete="email" required data-placeholder-en="you@example.com" data-placeholder-mk="tvoja@email.com" placeholder="tvoja@email.com">
+  </div>
+</div>
 <div class="aura-modal-actions">
-<button id="orderConfirm" type="button">Confirm Order</button>
-<button class="secondary" id="orderCancel" type="button">Cancel</button>
+<button id="orderConfirm" data-i18n="cart.confirmOrder" type="button">Потврди нарачка</button>
+<button class="secondary" id="orderCancel" data-i18n="cart.cancelOrder" type="button">Откажи</button>
 </div>
 </div>
 </div>
