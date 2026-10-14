@@ -153,7 +153,7 @@ const translations = {
         "checkout.namePlaceholder": "Enter your full name",
         "checkout.emailPlaceholder": "you@example.com",
         "order.enterDetails": "Please enter your name and a valid email address.",
-        "order.success": "Your order was placed successfully.",
+        "order.success": "Your order is confirmed successfully.",
         "order.failure": "We couldn't place your order. Please check the connection and try again.",
         "cookies.title": "Your privacy matters to us",
         "cookies.text": "AURA uses essential browser storage to remember your language and keep your cart working. We do not use analytics or advertising cookies. Essential storage remains active whichever option you choose.",
@@ -331,7 +331,7 @@ const translations = {
         "checkout.namePlaceholder": "Внеси име и презиме",
         "checkout.emailPlaceholder": "tvoja@email.com",
         "order.enterDetails": "Внеси име и валидна е-пошта.",
-        "order.success": "Нарачката е успешно испратена.",
+        "order.success": "Нарачката е потврдена успешно.",
         "order.failure": "Нарачката не успеа. Провери ја конекцијата и обиди се повторно.",
         "cookies.title": "Твојата приватност ни е важна",
         "cookies.text": "AURA користи неопходно складирање во прелистувачот за да го запомни јазикот и да ја одржува кошничката. Не користиме аналитички или рекламни колачиња. Неопходното складирање останува активно без оглед на твојот избор.",
@@ -606,8 +606,11 @@ function updateCartText() {
 const orderModal = document.getElementById("orderModal");
 const orderModalList = document.getElementById("orderModalList");
 const orderModalTotal = document.getElementById("orderModalTotal");
+let orderReturnScrollY = window.scrollY;
 
 function openOrderModal() {
+    // Remember the visitor's position so the page returns to the same place after a successful order.
+    orderReturnScrollY = window.scrollY;
     if (!cart.length) {
         showToast(currentLanguage === "mk" ? "Кошничката е празна." : "Your cart is empty.");
         return;
@@ -678,11 +681,15 @@ document.getElementById("orderConfirm").addEventListener("click", async () => {
         orderModal.setAttribute("aria-hidden", "true");
         closeCart();
 
+        // Return to the exact section the visitor was viewing and show a clear success message.
+        window.requestAnimationFrame(() => {
+            window.scrollTo({ top: orderReturnScrollY, behavior: "auto" });
+        });
         const orderId = result && result.order && result.order.id;
-        showToast(orderId ? `${t("order.success")} (#${orderId})` : t("order.success"));
+        showToast(orderId ? `${t("order.success")} (#${orderId})` : t("order.success"), "success");
     } catch (error) {
         console.error("Order error:", error);
-        showToast(t("order.failure"));
+        showToast(t("order.failure"), "error");
     } finally {
         button.disabled = false;
         button.textContent = t("cart.confirmOrder");
@@ -691,14 +698,19 @@ document.getElementById("orderConfirm").addEventListener("click", async () => {
 
 
 let toastTimer;
-function showToast(message) {
+function showToast(message, kind = "info") {
     const toast = document.getElementById("toast");
+    if (!toast) return;
     toast.textContent = message;
+    toast.classList.remove("toast-success", "toast-error");
+    if (kind === "success") toast.classList.add("toast-success");
+    if (kind === "error") toast.classList.add("toast-error");
     toast.classList.add("show");
     clearTimeout(toastTimer);
+    // Confirmation remains visible long enough to read after the modal closes.
     toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2600);
+        toast.classList.remove("show", "toast-success", "toast-error");
+    }, kind === "success" ? 5000 : 3500);
 }
 
 // Cookie notice: the site uses essential local storage for language/cart only.
