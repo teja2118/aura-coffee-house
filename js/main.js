@@ -144,10 +144,21 @@ const translations = {
         "cart.title": "Your order",
         "cart.total": "Total",
         "cart.checkout": "Continue",
+        "cart.orderSummary": "Order Summary",
+        "cart.confirmOrder": "Confirm Order",
+        "cart.cancelOrder": "Cancel",
+        "cart.processing": "Placing order…",
+        "checkout.name": "Full name",
+        "checkout.email": "Email address",
+        "checkout.namePlaceholder": "Enter your full name",
+        "checkout.emailPlaceholder": "you@example.com",
+        "order.enterDetails": "Please enter your name and a valid email address.",
+        "order.success": "Your order was placed successfully.",
+        "order.failure": "We couldn't place your order. Please check the connection and try again.",
         "cookies.title": "Your privacy matters to us",
-        "cookies.text": "AURA uses your browser's local storage to remember your preferences and settings. Information entered in demo orders, reservations, and contact forms remains on your device and is not sent to a server. AURA does not use advertising cookies.",
-        "cookies.accept": "Accept",
-        "cookies.settings": "Manage Preferences",
+        "cookies.text": "AURA uses essential browser storage to remember your language and keep your cart working. We do not use analytics or advertising cookies. Essential storage remains active whichever option you choose.",
+        "cookies.accept": "I agree",
+        "cookies.reject": "I disagree",
         "special.kicker": "AURA exclusive",
         "special.title": "Something Special",
         "special.intro": "Four little AURA experiences, made to turn an ordinary coffee visit into a moment worth remembering. Explore our digital menu QR system below for complete offerings.",
@@ -311,10 +322,21 @@ const translations = {
         "cart.title": "Твојата нарачка",
         "cart.total": "Вкупно",
         "cart.checkout": "Продолжи",
-        "cookies.title": "Мало известување за приватноста",
-        "cookies.text": "Ова демо ги зачувува изборот на јазик, тест-нарачките, резервациите и контакт-пораките само во овој прелистувач. Ништо не се испраќа до сервер; не користиме рекламни cookies.",
-        "cookies.accept": "Во ред",
-        "cookies.settings": "Само неопходни",
+        "cart.orderSummary": "Преглед на нарачката",
+        "cart.confirmOrder": "Потврди нарачка",
+        "cart.cancelOrder": "Откажи",
+        "cart.processing": "Нарачката се испраќа…",
+        "checkout.name": "Име и презиме",
+        "checkout.email": "Е-пошта",
+        "checkout.namePlaceholder": "Внеси име и презиме",
+        "checkout.emailPlaceholder": "tvoja@email.com",
+        "order.enterDetails": "Внеси име и валидна е-пошта.",
+        "order.success": "Нарачката е успешно испратена.",
+        "order.failure": "Нарачката не успеа. Провери ја конекцијата и обиди се повторно.",
+        "cookies.title": "Твојата приватност ни е важна",
+        "cookies.text": "AURA користи неопходно складирање во прелистувачот за да го запомни јазикот и да ја одржува кошничката. Не користиме аналитички или рекламни колачиња. Неопходното складирање останува активно без оглед на твојот избор.",
+        "cookies.accept": "Се согласувам",
+        "cookies.reject": "Не се согласувам",
         "special.kicker": "AURA ексклузивно",
         "special.title": "Нешто посебно",
         "special.intro": "Четири посебни AURA доживувања што секоја посета на кафе ја претвораат во убав момент. Разгледајте го нашиот QR систем за дигитално мени подолу за целосна понуда и детални информации.",
@@ -437,90 +459,52 @@ const filterButtons = document.querySelectorAll(".filter-btn");
 const menuGrid = document.getElementById("menuGrid");
 
 if (menuGrid) {
-    const categoryOrder = {
-        coffee: 0,
-        matcha: 1,
-        tea: 2
-    };
+    const categoryOrder = { coffee: 0, matcha: 1, tea: 2 };
 
-    const cards = Array.from(
-        menuGrid.querySelectorAll(".menu-card")
-    );
-
-    // Кафе прво, матча второ, чај последен.
-    cards.sort((a, b) =>
+    // Keep a stable baseline order: coffee first, matcha second, tea last.
+    const originalCards = Array.from(menuGrid.querySelectorAll(".menu-card"));
+    originalCards.sort((a, b) =>
         (categoryOrder[a.dataset.category] ?? 99) -
         (categoryOrder[b.dataset.category] ?? 99)
     );
 
-    cards.forEach(card => menuGrid.appendChild(card));
-
     function showMenu(filter = "all") {
         filterButtons.forEach(button => {
-            button.classList.toggle(
-                "active",
-                button.dataset.filter === filter
-            );
+            button.classList.toggle("active", button.dataset.filter === filter);
         });
 
-        cards.forEach(card => {
-            const visible =
-                filter === "all" ||
-                card.dataset.category === filter;
+        // Put matching cards at the start of the grid, so Matcha and Tea
+        // results appear in the first available position instead of leaving gaps.
+        const matchingCards = originalCards.filter(card =>
+            filter === "all" || card.dataset.category === filter
+        );
+        const hiddenCards = originalCards.filter(card => !matchingCards.includes(card));
+        [...matchingCards, ...hiddenCards].forEach(card => menuGrid.appendChild(card));
 
-            card.style.setProperty(
-                "display",
-                visible ? "flex" : "none",
-                "important"
-            );
+        originalCards.forEach(card => {
+            const visible = matchingCards.includes(card);
+            card.style.removeProperty("display");
+            card.style.removeProperty("grid-column");
+            card.style.removeProperty("grid-row");
+            card.style.removeProperty("position");
 
-            if (visible) {
+            if (!visible) {
+                card.style.setProperty("display", "none", "important");
+            } else {
+                card.classList.add("visible");
                 card.style.setProperty("opacity", "1", "important");
-                card.style.setProperty(
-                    "transform",
-                    "translateY(0)",
-                    "important"
-                );
+                card.style.setProperty("transform", "translateY(0)", "important");
             }
         });
     }
 
     filterButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            showMenu(button.dataset.filter);
-        });
+        button.addEventListener("click", () => showMenu(button.dataset.filter || "all"));
     });
 
-    // При секое отворање прикажи ги сите производи.
+    // Always start with the complete menu; Tea and Matcha are applied only on click.
     showMenu("all");
 }
-
-const menuCards = document.querySelectorAll(".menu-card");
-
-filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-        const filter = button.dataset.filter;
-        menuCards.forEach(card => {
-            const category = card.dataset.category;
-            const show = filter === "all" || category === filter;
-            if (show) {
-                card.style.display = "";
-                requestAnimationFrame(() => {
-                    card.style.opacity = "1";
-                    card.style.transform = "translateY(0)";
-                });
-            } else {
-                card.style.opacity = "0";
-                card.style.transform = "translateY(15px)";
-                setTimeout(() => {
-                    card.style.display = "none";
-                }, 300);
-            }
-        });
-    });
-});
 
 const formatMoney = (value) => `${Number(value || 0).toFixed(2)} ден`;
 // Restore the visitor's cart instead of clearing it every time the page loads.
@@ -644,37 +628,21 @@ orderModal.addEventListener("click", e => { if (e.target === orderModal) { order
 
 document.getElementById("orderConfirm").addEventListener("click", async () => {
     const button = document.getElementById("orderConfirm");
+    const nameInput = document.getElementById("orderCustomerName");
+    const emailInput = document.getElementById("orderCustomerEmail");
 
     if (!cart.length) {
-        showToast(currentLanguage === "mk"
-            ? "Кошничката е празна."
-            : "Your cart is empty.");
+        showToast(currentLanguage === "mk" ? "Кошничката е празна." : "Your cart is empty.");
         return;
     }
 
-    const customerName = prompt(
-        currentLanguage === "mk"
-            ? "Внеси го твоето име:"
-            : "Enter your name:"
-    );
+    const customerName = nameInput ? nameInput.value.trim() : "";
+    const customerEmail = emailInput ? emailInput.value.trim() : "";
 
-    if (!customerName || !customerName.trim()) {
-        showToast(currentLanguage === "mk"
-            ? "Внеси име за да продолжиш."
-            : "Please enter your name.");
-        return;
-    }
-
-    const customerEmail = prompt(
-        currentLanguage === "mk"
-            ? "Внеси е-пошта:"
-            : "Enter your email:"
-    );
-
-    if (!customerEmail || !customerEmail.trim()) {
-        showToast(currentLanguage === "mk"
-            ? "Внеси е-пошта за да продолжиш."
-            : "Please enter your email.");
+    if (!customerName || !customerEmail || !emailInput.checkValidity()) {
+        showToast(t("order.enterDetails"));
+        if (!customerName && nameInput) nameInput.focus();
+        else if (emailInput) emailInput.focus();
         return;
     }
 
@@ -684,49 +652,40 @@ document.getElementById("orderConfirm").addEventListener("click", async () => {
     }));
 
     button.disabled = true;
+    button.textContent = t("cart.processing");
 
     try {
         const response = await fetch("http://localhost:3000/api/orders", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                customer_name: customerName.trim(),
-                customer_email: customerEmail.trim(),
+                customer_name: customerName,
+                customer_email: customerEmail,
                 items
             })
         });
 
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.error || "Order failed");
-        }
+        let result = {};
+        try { result = await response.json(); } catch (_) { /* Response may be empty */ }
+        if (!response.ok) throw new Error(result.error || "Order failed");
 
         cart = [];
-        localStorage.setItem(
-            "auraCart_local_images_v2",
-            JSON.stringify(cart)
-        );
-
+        localStorage.setItem("auraCart_local_images_v2", JSON.stringify(cart));
         updateCart();
+        if (nameInput) nameInput.value = "";
+        if (emailInput) emailInput.value = "";
         orderModal.classList.remove("open");
         orderModal.setAttribute("aria-hidden", "true");
-
-        showToast(currentLanguage === "mk"
-            ? `Нарачката #${result.order.id} е зачувана!`
-            : `Order #${result.order.id} was saved!`);
-
         closeCart();
+
+        const orderId = result && result.order && result.order.id;
+        showToast(orderId ? `${t("order.success")} (#${orderId})` : t("order.success"));
     } catch (error) {
         console.error("Order error:", error);
-
-        showToast(currentLanguage === "mk"
-            ? "Нарачката не успеа. Провери дали backend-от работи."
-            : "Order failed. Check whether the backend is running.");
+        showToast(t("order.failure"));
     } finally {
         button.disabled = false;
+        button.textContent = t("cart.confirmOrder");
     }
 });
 
@@ -742,21 +701,27 @@ function showToast(message) {
     }, 2600);
 }
 
-// Privacy notice: demo data, including contact and reservation details, stays in this browser localStorage.
+// Cookie notice: the site uses essential local storage for language/cart only.
 const cookieBanner = document.getElementById("cookieBanner");
-const cookieAccepted = localStorage.getItem("auraCookies");
+const cookieChoice = localStorage.getItem("auraCookies");
 const cookieAcceptButton = document.getElementById("cookieAccept");
+const cookieRejectButton = document.getElementById("cookieReject");
 
-if (cookieBanner && !cookieAccepted) {
+if (cookieBanner && !cookieChoice) {
     setTimeout(() => cookieBanner.classList.add("show"), 1400);
 }
 
-if (cookieAcceptButton && cookieBanner) {
-    cookieAcceptButton.addEventListener("click", () => {
-        localStorage.setItem("auraCookies", "acknowledged");
-        cookieBanner.classList.remove("show");
-    });
+function saveCookieChoice(choice) {
+    try {
+        localStorage.setItem("auraCookies", choice);
+    } catch (error) {
+        console.warn("Could not save cookie preference:", error);
+    }
+    if (cookieBanner) cookieBanner.classList.remove("show");
 }
+
+if (cookieAcceptButton) cookieAcceptButton.addEventListener("click", () => saveCookieChoice("accepted"));
+if (cookieRejectButton) cookieRejectButton.addEventListener("click", () => saveCookieChoice("rejected"));
 
 document.getElementById("contactForm").addEventListener("submit", event => {
     event.preventDefault();
