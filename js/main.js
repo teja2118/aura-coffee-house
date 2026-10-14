@@ -1,3 +1,6 @@
+/* AURA Coffee House main.js — scoped to prevent global const redeclaration if loaded twice. */
+(function () {
+'use strict';
 
 const translations = {
     en: {
@@ -1044,4 +1047,6 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") { closeArtic
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') $$('.aura-modal.open').forEach(close)
     });
+})();
+
 })();
