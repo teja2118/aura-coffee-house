@@ -429,7 +429,6 @@ document.querySelectorAll("[data-mobile-link]").forEach(link => {
     });
 });
 
-const filterButtons = document.querySelectorAll(".filter-btn");
 
 const filterButtons = document.querySelectorAll(".filter-btn");
 const menuGrid = document.getElementById("menuGrid");
