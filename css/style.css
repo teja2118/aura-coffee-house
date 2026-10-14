@@ -2995,3 +2995,8 @@ button:hover, .primary-btn:hover, .outline-btn:hover, .filter-btn:hover,
 @media (max-width: 380px) {
   #menuGrid.menu-grid { grid-template-columns: 1fr !important; }
 }
+/* FIX: hide the loading screen */
+.loader {
+    display: none !important;
+}
+
