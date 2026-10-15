@@ -1,3 +1,4 @@
+```
 <!DOCTYPE html>
 
 <html lang="mk"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
@@ -758,7 +759,7 @@
 </div>
 </div>
 
-    <script src="js/main.js?v=20261015-mk-en-qr-v4" defer></script>
+    <script src="js/main.js?v=20261015-qr-language-v5" defer></script>
 
 <!-- Updated AURA QR code: opens the menu page directly -->
 <div class="aura-modal" id="auraMenuQrModal" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(20,15,10,.78);align-items:center;justify-content:center;padding:20px;">
@@ -780,12 +781,42 @@
   const closeBtn = document.getElementById('auraMenuQrClose');
   let qrCreated = false;
 
+  // Keep the dedicated QR popup translated even if cached/main.js language
+  // handlers are stale or the user opens the popup immediately after switching language.
+  const qrCopy = {
+    mk: {
+      'qr.title': 'Дигитално мени',
+      'qr.description': 'Скенирај го кодот за директно да го отвориш менито на AURA.',
+      'qr.open': 'Отвори мени',
+      'qr.close': 'Затвори QR-код'
+    },
+    en: {
+      'qr.title': 'Digital Menu',
+      'qr.description': 'Scan the code to open the AURA menu directly.',
+      'qr.open': 'Open menu',
+      'qr.close': 'Close QR code'
+    }
+  };
+
+  function syncQrLanguage() {
+    let language = 'mk';
+    try { language = localStorage.getItem('auraLanguage') === 'en' ? 'en' : 'mk'; } catch (_) {}
+    const copy = qrCopy[language];
+    modal.querySelectorAll('[data-i18n]').forEach(function (element) {
+      const key = element.getAttribute('data-i18n');
+      if (copy[key]) element.textContent = copy[key];
+    });
+    if (closeBtn) closeBtn.setAttribute('aria-label', copy['qr.close']);
+    return language;
+  }
+
   function openMenuQr(event) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
       if (event.stopImmediatePropagation) event.stopImmediatePropagation();
     }
+    syncQrLanguage();
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     if (!qrCreated && window.QRCode) {
